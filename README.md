@@ -1,1 +1,8 @@
-# elk_stack_local
+### Directory Organization
+
+```shell
+./
+├── logstash.conf
+│
+└── docker-compose.yml
+```
