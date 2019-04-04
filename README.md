@@ -1,10 +1,17 @@
+### Introduction
+
+Running ELK infrastructure
+
+## Prerequisites
+ - Docker
+
 ### Directory Organization
 
 ```shell
 ./
-├── logstash.conf
+├── logstash.conf #Data transformation pipeline
 │
-└── docker-compose.yml
+└── docker-compose.yml #Infrastructure
 ```
 
 ### How to start the infrastructure ?
