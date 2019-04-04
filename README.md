@@ -1,8 +1,4 @@
-### Introduction
-
-Running ELK infrastructure
-
-## Prerequisites
+### Prerequisites
  - Docker
 
 ### Directory Organization
