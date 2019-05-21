@@ -21,3 +21,18 @@ The purpose of this meetup is to demonstrate how easy it can be to monitor vario
 ```shell
 docker-compose up -d
 ```
+
+### Body
+
+```json
+{	
+ "type":"log",
+ "release":"0.0.1",
+ "batch":[{"message":"file=wesley.txt"},
+          {"message":"file=leo.txt"}]
+}
+```
+
+```json
+{"type":"tracing",  "release":"0.0.1", "message":"file=tracing.txt"}
+```
