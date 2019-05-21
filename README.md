@@ -26,13 +26,15 @@ docker-compose up -d
 
 ```json
 {	
- "type":"log",
+ "application":"ios",
+ "tenant":"client",
  "release":"0.0.1",
+ "level":"tracing",
  "batch":[{"message":"file=wesley.txt"},
           {"message":"file=leo.txt"}]
 }
 ```
 
 ```json
-{"type":"tracing",  "release":"0.0.1", "message":"file=tracing.txt"}
+{"application":"webapp", "tenant":"client", "release":"0.0.1", "level":"tracing", "message":"file=tracing.txt"}
 ```
