@@ -19,7 +19,7 @@ The purpose of this meetup is to demonstrate how easy it can be to monitor vario
 ### How to start the infrastructure ?
 
 ```shell
-docker-compose up -d
+docker-compose -f infrastructure/docker-compose.yml  up -d
 ```
 
 ### Body
