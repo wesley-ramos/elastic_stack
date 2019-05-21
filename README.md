@@ -1,3 +1,7 @@
+# ELK Stack
+## Introduction
+The purpose of this meetup is to demonstrate how easy it can be to monitor various levels of the application
+
 ### Prerequisites
  - Docker
 
