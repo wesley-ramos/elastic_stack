@@ -23,8 +23,8 @@ services:
     volumes:
       - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     ports:
-      - 8090:8090
-      - 8091:8091
+      - 8090:8090/tcp
+      - 8091:8091/udp
     links:
       - elasticsearch
     depends_on:
