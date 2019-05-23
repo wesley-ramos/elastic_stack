@@ -4,7 +4,7 @@
     	<Console name="stdout" target="SYSTEM_OUT">
     		<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } [%t] --- %-40.40logger{39} : %m%n"/>
     	</Console>
-    	<Socket name="logstash" protocol="udp" host="172.21.0.4" port="8091" immediateFlush="true">
+    	<Socket name="logstash" protocol="udp" host="localhost" port="8091" immediateFlush="true">
         	 <PatternLayout pattern="application=webapp level=tracing %m%n"/>
     	</Socket>
     </Appenders>  
