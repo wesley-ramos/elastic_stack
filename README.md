@@ -2,7 +2,8 @@
 ![Architecture](architecture.png "Architecture")
 
 ## Introduction
-The purpose of this meetup is to demonstrate how easy it can be to monitor various levels of the application
+
+The purpose of this POC is to centralize the logs of a multinentant application and mobile devices.
 
 ### Prerequisites
  - Docker
@@ -11,9 +12,10 @@ The purpose of this meetup is to demonstrate how easy it can be to monitor vario
 
 ```shell
 ./
-├── logstash.conf #Data transformation pipeline
-│
-└── docker-compose.yml #Infrastructure
+├── infrastructure 
+│   ├── logstash.conf
+│   └── docker-compose.yml
+└── webapp 
 ```
 
 ### How to start the infrastructure ?
@@ -22,7 +24,7 @@ The purpose of this meetup is to demonstrate how easy it can be to monitor vario
 docker-compose -f infrastructure/docker-compose.yml  up -d
 ```
 
-### Body
+### Mobile device integration (HTTPs)
 
 ```json
 {	
@@ -35,6 +37,6 @@ docker-compose -f infrastructure/docker-compose.yml  up -d
 }
 ```
 
-```json
-{"application":"webapp", "tenant":"client", "release":"0.0.1", "level":"tracing", "message":"file=tracing.txt"}
-```
+### Web APP integration (UDP)
+
+
