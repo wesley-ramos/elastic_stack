@@ -1,14 +1,14 @@
 version: '2'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.0
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.2
     container_name: elasticsearch
     ports:
       - 9200:9200
       - 9300:9300
       
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.6.0
+    image: docker.elastic.co/kibana/kibana-oss:6.6.2
     container_name: kibana
     ports:
       - 5601:5601
@@ -18,14 +18,25 @@ services:
       - elasticsearch
     
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.3.2
     container_name: logstash
-    volumes:
-      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    build:
+      context: ./logstash
     ports:
       - 8090:8090/tcp
       - 8091:8091/udp
     links:
       - elasticsearch
+    depends_on:
+      - elasticsearch
+
+  apm:
+    container_name: apm
+    build:
+      context: ./apm
+    ports:
+      - 8200:8200
+    links:
+      - elasticsearch
+      - kibana
     depends_on:
       - elasticsearch
