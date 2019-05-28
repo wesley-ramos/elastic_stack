@@ -26,14 +26,16 @@ docker-compose -f infrastructure/docker-compose.yml  up -d
 
 ### Mobile device integration (HTTPs)
 
+The communication with the mobile is performed through the entrypoint "localhost: 8090", it receives a lot of logs with the following structure
+
 ```json
 {	
  "application":"ios",
  "tenant":"client",
  "release":"0.0.1",
  "level":"tracing",
- "batch":[{"message":"file=wesley.txt"},
-          {"message":"file=leo.txt"}]
+ "batch":[{"message":"my message"},
+          {"message":"my message"}]
 }
 ```
 
