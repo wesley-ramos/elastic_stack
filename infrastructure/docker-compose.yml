@@ -1,61 +1,34 @@
 version: '2.3'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.2
+    build:
+      context: ./elasticsearch
     container_name: elasticsearch
-    restart: unless-stopped
+    network_mode: internal_apps
     ports:
       - 9200:9200
       - 9300:9300
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9200"]
-      timeout: 10s
-      retries: 2
-      start_period: 10s
-      
+
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.6.2
+    build:
+      context: ./kibana
     container_name: kibana
-    restart: unless-stopped
+    network_mode: internal_apps
     ports:
       - 5601:5601
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5601"]
-      timeout: 10s
-      retries: 2
-      start_period: 10s  
     links:
       - elasticsearch
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-    
+
   logstash:
-    container_name: logstash
     build:
       context: ./logstash
-    restart: unless-stopped  
+    container_name: logstash
+    network_mode: internal_apps
+    volumes:
+      - ./logstash/volumes:/usr/share/logstash/data
     ports:
-      - 8090:8090/tcp
-      - 8091:8091/udp
+      - 8080:8080
+      - 8090:8090/udp
+      - 12201:12201
     links:
       - elasticsearch
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-
-  apm:
-    container_name: apm
-    build:
-      context: ./apm
-    ports:
-      - 8200:8200
-    links:
-      - elasticsearch
-      - kibana
-    restart: unless-stopped  
-    depends_on:
-      elasticsearch:
-        condition: service_healthy
-      kibana:
-        condition: service_healthy

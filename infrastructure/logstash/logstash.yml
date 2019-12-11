@@ -1,0 +1,11 @@
+xpack.monitoring.enabled: true
+xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+xpack.monitoring.elasticsearch.username: "elastic"
+xpack.monitoring.elasticsearch.password: "involves"
+
+pipeline.batch.size: 125
+pipeline.batch.delay: 50
+pipeline.workers: 4
+
+queue.type: persisted
+queue.max_bytes: 1024mb

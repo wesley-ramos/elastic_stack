@@ -1,3 +1,7 @@
-FROM docker.elastic.co/logstash/logstash-oss:6.6.2
+FROM docker.elastic.co/logstash/logstash:7.5.0
 
-COPY logstash.conf /usr/share/logstash/pipeline/logstash.conf
+COPY pipeline /usr/share/logstash/pipeline
+COPY certs /certs
+
+COPY logstash.yml /usr/share/logstash/config/logstash.yml
+COPY pipelines.yml /usr/share/logstash/config/pipelines.yml

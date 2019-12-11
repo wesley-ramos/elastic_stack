@@ -1,0 +1,8 @@
+- pipeline.id: auditing
+  path.config: "/usr/share/logstash/pipeline/auditing.conf"
+  
+- pipeline.id: logs
+  path.config: "/usr/share/logstash/pipeline/logs.conf"
+  
+- pipeline.id: mobile
+  path.config: "/usr/share/logstash/pipeline/mobile.conf"
