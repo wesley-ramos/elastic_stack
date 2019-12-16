@@ -1,0 +1,91 @@
+
+PUT _template/form-auditing
+{
+  "index_patterns": ["*form-auditing"],
+  "settings": {
+    "number_of_shards": 1
+  },
+  "mappings": {
+    "_source": {
+      "enabled": true
+    },
+    "properties": {
+      "actor": {
+        "type": "keyword"
+      },
+      "id": {
+        "type": "long"
+      },
+      "name": {
+        "type": "keyword"
+      },
+      "goal": {
+        "type": "keyword"
+      }
+    }
+  }
+}
+
+-------------------------------------------------------------------------------
+
+PUT _template/custumer-auditing
+{
+  "index_patterns": ["*custumer-auditing"],
+  "settings": {
+    "number_of_shards": 1
+  },
+  "mappings": {
+    "_source": {
+      "enabled": true
+    },
+    "properties": {
+      "actor": {
+        "type": "keyword"
+      },
+      "id": {
+        "type": "long"
+      },
+      "name": {
+        "type": "keyword"
+      },
+      "birthday": {
+        "type": "date"
+      },
+      "profileId": {
+        "type": "long"
+      }
+    }
+  }
+}
+
+-------------------------------------------------------------------------------
+
+PUT _template/logs
+{
+  "index_patterns": ["*-logs"],
+  "settings": {
+    "number_of_shards": 1
+  },
+  "mappings": {
+    "_source": {
+      "enabled": true
+    },
+    "properties": {
+      "application": {
+        "type": "keyword"
+      },
+      "log_date": {
+        "type": "date"
+      },
+      "transaction_identifier": {
+        "type": "keyword"
+      },
+      "service": {
+        "type": "keyword"
+      },
+      "details": {
+        "type": "text"
+      }
+    }
+  }
+}
