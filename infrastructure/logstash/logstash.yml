@@ -1,7 +1,7 @@
 xpack.monitoring.enabled: true
 xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 xpack.monitoring.elasticsearch.username: "elastic"
-xpack.monitoring.elasticsearch.password: "involves"
+xpack.monitoring.elasticsearch.password: "elastic"
 
 pipeline.batch.size: 125
 pipeline.batch.delay: 50

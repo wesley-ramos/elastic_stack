@@ -6,3 +6,6 @@
   
 - pipeline.id: mobile
   path.config: "/usr/share/logstash/pipeline/mobile.conf"
+  
+- pipeline.id: log4j
+  path.config: "/usr/share/logstash/pipeline/log4j.conf"

@@ -29,6 +29,7 @@ services:
     ports:
       - 8080:8080
       - 8090:8090/udp
+      - 8070:8070/udp
       - 12201:12201
     links:
       - elasticsearch
