@@ -4,32 +4,20 @@ services:
     build:
       context: ./elasticsearch
     container_name: elasticsearch
-    network_mode: internal_apps
-    ports:
-      - 9200:9200
-      - 9300:9300
+    network_mode: host
+    volumes:
+      - ./elasticsearch/volumes:/usr/share/elasticsearch/data
 
   kibana:
     build:
       context: ./kibana
     container_name: kibana
-    network_mode: internal_apps
-    ports:
-      - 5601:5601
-    links:
-      - elasticsearch
+    network_mode: host
 
   logstash:
     build:
       context: ./logstash
     container_name: logstash
-    network_mode: internal_apps
+    network_mode: host
     volumes:
       - ./logstash/volumes:/usr/share/logstash/data
-    ports:
-      - 8080:8080
-      - 8090:8090/udp
-      - 8070:8070/udp
-      - 12201:12201
-    links:
-      - elasticsearch
