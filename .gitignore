@@ -5,3 +5,4 @@ webapp/.project
 
 infrastructure/logstash/certs/
 infrastructure/logstash/volumes/
+infrastructure/elasticsearch/volumes/
