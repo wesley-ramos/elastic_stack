@@ -6,13 +6,16 @@ services:
     container_name: elasticsearch
     network_mode: host
     volumes:
-      - ./elasticsearch/volumes:/usr/share/elasticsearch/data
+      - elasticsearch_data:/usr/share/elasticsearch/data
 
   kibana:
     build:
       context: ./kibana
     container_name: kibana
     network_mode: host
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
 
   logstash:
     build:
@@ -20,7 +23,10 @@ services:
     container_name: logstash
     network_mode: host
     volumes:
-      - ./logstash/volumes:/usr/share/logstash/data
+      - logstash_data:/usr/share/logstash/data
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
   
   prometheus:
     build:
@@ -33,3 +39,7 @@ services:
       context: ./grafana
     container_name: grafana
     network_mode: "host"
+    
+volumes:
+  elasticsearch_data:
+  logstash_data:
