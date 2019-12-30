@@ -51,6 +51,6 @@ build/
 hs_err_pid*
 
 
-infrastructure/logstash/certs/
-infrastructure/logstash/volumes/
-infrastructure/elasticsearch/volumes/
+logstash/certs/
+logstash/volumes/
+elasticsearch/volumes/
