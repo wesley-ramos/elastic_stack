@@ -1,4 +1,4 @@
-package com.involves.audit.services.custumer;
+package com.involves.audit.services.customer;
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Custumer {
+public class Customer {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

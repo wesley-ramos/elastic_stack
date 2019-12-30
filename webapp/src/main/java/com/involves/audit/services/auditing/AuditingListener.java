@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-import com.involves.audit.services.custumer.CustumerCreatedEvent;
+import com.involves.audit.services.customer.CustomerCreatedEvent;
 import com.involves.audit.services.form.FormCreatedEvent;
 
 @Service
@@ -19,17 +19,17 @@ public class AuditingListener {
 	}
 	
 	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void processCustumerCreatedEvent(CustumerCreatedEvent custumerEvent) {
+    public void processCustomerCreatedEvent(CustomerCreatedEvent customerEvent) {
 		
 		Auditing  auditing = AuditingBuilder.aAuditing()
-			.withField("actor", custumerEvent.getUsername())
-			.withField("id", custumerEvent.getCustumer().getId())
-			.withField("name", custumerEvent.getCustumer().getName())
-			.withField("birthday", custumerEvent.getCustumer().getBirthday().getTime())
-			.withField("profileId", custumerEvent.getCustumer().getProfileId())
+			.withField("actor", customerEvent.getUsername())
+			.withField("id", customerEvent.getCustomer().getId())
+			.withField("name", customerEvent.getCustomer().getName())
+			.withField("birthday", customerEvent.getCustomer().getBirthday().getTime())
+			.withField("profileId", customerEvent.getCustomer().getProfileId())
 		.build();
 			
-		auditingService.audit(Functionality.CUSTUMER, auditing);
+		auditingService.audit(Functionality.CUSTOMER, auditing);
     }
 	
 	
