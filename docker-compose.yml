@@ -21,3 +21,9 @@ services:
     network_mode: host
     volumes:
       - ./logstash/volumes:/usr/share/logstash/data
+  
+  prometheus:
+    build:
+      context: ./prometheus
+    container_name: prometheus
+    network_mode: "host"
