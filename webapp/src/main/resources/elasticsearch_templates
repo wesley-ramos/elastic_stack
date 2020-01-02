@@ -28,9 +28,9 @@ PUT _template/form-auditing
 
 -------------------------------------------------------------------------------
 
-PUT _template/custumer-auditing
+PUT _template/customer-auditing
 {
-  "index_patterns": ["*custumer-auditing"],
+  "index_patterns": ["*customer-auditing"],
   "settings": {
     "number_of_shards": 1
   },

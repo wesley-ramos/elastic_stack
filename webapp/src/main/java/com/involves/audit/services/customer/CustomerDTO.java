@@ -1,10 +1,10 @@
-package com.involves.audit.services.custumer;
+package com.involves.audit.services.customer;
 
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class CustumerDTO {
+public class CustomerDTO {
 	
 	private String name;
 	private String login;
