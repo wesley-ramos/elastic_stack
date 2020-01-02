@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.involves.audit.configuration.AppConfiguration;
+
 @Service
 public class CustomerService {
 	
@@ -25,6 +27,6 @@ public class CustomerService {
 		Customer customer = modelMapper.map(customerDTO, Customer.class);
 		Customer entity = customerRepository.save(customer);
 		
-		publisher.publishEvent(new CustomerCreatedEvent("wesley.ramos", entity));
+		publisher.publishEvent(new CustomerCreatedEvent(AppConfiguration.USER_NAME, entity));
 	}
 }

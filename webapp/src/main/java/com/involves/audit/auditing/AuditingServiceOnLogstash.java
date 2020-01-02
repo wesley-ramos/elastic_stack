@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.involves.audit.configuration.AppConfiguration;
 
 @Service
 public class AuditingServiceOnLogstash implements AuditingService {
@@ -23,14 +24,14 @@ public class AuditingServiceOnLogstash implements AuditingService {
 	}
 
 	@Override
-	public void audit(Functionality functionality, Auditing auditing) {
+	public void audit(String functionality, Auditing auditing) {
 		
 		try {
 			InetAddress address = InetAddress.getByName("localhost");
 			
 			Map<String, Object> data = auditing.getAuditing();
-			data.put("functionality", functionality.name().toLowerCase());
-			data.put("application", "developer");
+			data.put("functionality", functionality);
+			data.put("application", AppConfiguration.APPLICATION_NAME);
 			
 			byte[] message = objectMapper.writeValueAsString(data).getBytes();
 

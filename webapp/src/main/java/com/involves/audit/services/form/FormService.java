@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.involves.audit.configuration.AppConfiguration;
+
 @Service
 public class FormService {
 	
@@ -25,6 +27,6 @@ public class FormService {
 		Form form = modelMapper.map(formDTO, Form.class);
 		Form entity = formRepository.save(form);
 		
-		publisher.publishEvent(new FormCreatedEvent("wesley.ramos", entity));
+		publisher.publishEvent(new FormCreatedEvent(AppConfiguration.USER_NAME, entity));
 	}
 }
