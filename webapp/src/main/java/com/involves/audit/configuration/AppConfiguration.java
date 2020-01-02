@@ -20,7 +20,7 @@ import io.prometheus.client.exporter.MetricsServlet;
 public class AppConfiguration {
 	
 	public static String USER_NAME = "wesley.ramos";
-	public static String APPLICATION_NAME = "devepoler";
+	public static String APPLICATION_NAME = "developer";
 
 	@Bean
 	public ModelMapper modelMapper() {
