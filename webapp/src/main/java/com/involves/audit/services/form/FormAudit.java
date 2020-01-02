@@ -11,24 +11,24 @@ import com.involves.audit.auditing.AuditingService;
 
 @Service
 public class FormAudit {
-	
+
 	private AuditingService auditingService;
-	
+
 	@Autowired
 	public FormAudit(AuditingService auditingService) {
 		this.auditingService = auditingService;
 	}
-	
+
 	@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void processFormCreatedEvent(FormCreatedEvent formEvent) {
-		
-		Auditing  auditing = AuditingBuilder.aAuditing()
+	public void processFormCreatedEvent(FormCreatedEvent formEvent) {
+
+		Auditing auditing = AuditingBuilder.aAuditing()
 			.withField("actor", formEvent.getUsername())
 			.withField("id", formEvent.getForm().getId())
 			.withField("name", formEvent.getForm().getName())
 			.withField("goal", formEvent.getForm().getGoal())
 		.build();
-			
+
 		auditingService.audit("FORM_SAVE", auditing);
-    }
+	}
 }
