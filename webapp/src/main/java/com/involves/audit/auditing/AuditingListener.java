@@ -1,4 +1,4 @@
-package com.involves.audit.services.auditing;
+package com.involves.audit.auditing;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

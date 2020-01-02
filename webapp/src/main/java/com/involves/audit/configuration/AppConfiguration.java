@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.involves.audit.filter.CorrelateLogMessage;
+import com.involves.audit.filter.Monitoring;
 
 @Configuration
 public class AppConfiguration {
@@ -30,12 +30,12 @@ public class AppConfiguration {
 	}
 	
 	@Bean
-	public FilterRegistrationBean<CorrelateLogMessage> loggingFilter(){
-	    FilterRegistrationBean<CorrelateLogMessage> registrationBean  = new FilterRegistrationBean<>();
+	public FilterRegistrationBean<Monitoring> loggingFilter(){
+	    FilterRegistrationBean<Monitoring> monitoring  = new FilterRegistrationBean<>();
 	         
-	    registrationBean.setFilter(new CorrelateLogMessage());
-	    registrationBean.addUrlPatterns("*");
+	    monitoring.setFilter(new Monitoring());
+	    monitoring.addUrlPatterns("*");
 	         
-	    return registrationBean;    
+	    return monitoring;    
 	}
 }

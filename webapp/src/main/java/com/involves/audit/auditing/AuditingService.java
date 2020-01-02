@@ -1,4 +1,4 @@
-package com.involves.audit.services.auditing;
+package com.involves.audit.auditing;
 
 public interface AuditingService {
 	

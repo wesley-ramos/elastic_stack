@@ -15,11 +15,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(1)
-public class CorrelateLogMessage implements Filter {
+public class Monitoring implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
 		MDC.put("tracking", UUID.randomUUID().toString());
 		
 		try {
