@@ -2,5 +2,5 @@ package com.involves.audit.auditing;
 
 public interface AuditingService {
 	
-	public void audit(Functionality action, Auditing auditing);
+	public void audit(String action, Auditing auditing);
 }
