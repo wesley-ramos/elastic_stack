@@ -39,15 +39,7 @@ services:
       context: ./grafana
     container_name: grafana
     network_mode: "host"
-  
-  mysql:
-    image: mysql:5.6
-    container_name: mysql
-    network_mode: "host"
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db_example
-  
+    
     
 volumes:
   elasticsearch_data:

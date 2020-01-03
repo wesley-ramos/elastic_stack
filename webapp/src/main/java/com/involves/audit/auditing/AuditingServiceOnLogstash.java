@@ -1,45 +1,49 @@
 package com.involves.audit.auditing;
 
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.Map;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.involves.audit.configuration.AppConfiguration;
 
 @Service
 public class AuditingServiceOnLogstash implements AuditingService {
-
-	private DatagramSocket socket;
-	private ObjectMapper objectMapper;
+	
+	private Logger logger = LoggerFactory.getLogger(AuditingServiceOnLogstash.class);
+	
+	private AuditingConnection connection;
+	private LogstashMessageSpliter prepareMessage;
 
 	@Autowired
-	public AuditingServiceOnLogstash(DatagramSocket socket, ObjectMapper objectMapper) {
-		this.socket = socket;
-		this.objectMapper = objectMapper;
+	public AuditingServiceOnLogstash(AuditingConnection connection, LogstashMessageSpliter prepareMessage) {
+		this.connection = connection;
+		this.prepareMessage = prepareMessage;
 	}
 
 	@Override
 	public void audit(String functionality, Auditing auditing) {
 		
 		try {
+			
 			InetAddress address = InetAddress.getByName("localhost");
+			int port = 8090;
 			
-			Map<String, Object> data = auditing.getAuditing();
-			data.put("functionality", functionality);
-			data.put("application", AppConfiguration.APPLICATION_NAME);
+			auditing.setFunctionality(functionality);
+			auditing.setApplication(AppConfiguration.APPLICATION_NAME);
 			
-			byte[] message = objectMapper.writeValueAsString(data).getBytes();
-
-			DatagramPacket packet = new DatagramPacket(message, message.length, address, 8090);
-			socket.send(packet);
-
+			List<DatagramPacket> packets = prepareMessage.split(address, port, auditing);
+			
+			for (DatagramPacket packet : packets) {
+				connection.send(packet);
+			}
+			
 		} catch (Exception ex) {
-			System.out.println("Chegou aqui:"+ex.getMessage());
+			logger.error("failed to send message to Logstash", ex);
 		}
 	}
 }

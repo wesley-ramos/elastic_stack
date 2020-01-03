@@ -9,8 +9,16 @@ public class Auditing {
 	public Auditing(Map<String, Object> auditing) {
 		this.auditing = auditing;
 	}
-
-	public Map<String, Object> getAuditing() {
+	
+	public void setFunctionality(String functionality) {
+		auditing.put("functionality", functionality);
+	}
+	
+	public void setApplication(String application) {
+		auditing.put("application", application);
+	}
+	
+	public Map<String, Object> getData() {
 		return auditing;
 	}
 }

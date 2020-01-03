@@ -1,8 +1,5 @@
 package com.involves.audit.configuration;
 
-import java.net.DatagramSocket;
-import java.net.SocketException;
-
 import javax.servlet.http.HttpServlet;
 
 import org.modelmapper.ModelMapper;
@@ -25,11 +22,6 @@ public class AppConfiguration {
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
-	}
-
-	@Bean
-	public DatagramSocket logstash() throws SocketException {
-		return new DatagramSocket();
 	}
 
 	@Bean

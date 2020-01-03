@@ -29,6 +29,6 @@ public class FormAudit {
 			.withField("goal", formEvent.getForm().getGoal())
 		.build();
 
-		auditingService.audit("FORM_SAVE", auditing);
+		auditingService.audit("form_save", auditing);
 	}
 }
