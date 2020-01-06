@@ -1,4 +1,4 @@
-package com.involves.audit.auditing;
+package com.involves.audit.services.auditing;
 
 import java.util.Map;
 

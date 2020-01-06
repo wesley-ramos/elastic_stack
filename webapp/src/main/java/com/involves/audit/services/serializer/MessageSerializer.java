@@ -1,4 +1,4 @@
-package com.involves.audit.utils;
+package com.involves.audit.services.serializer;
 
 
 public interface MessageSerializer {

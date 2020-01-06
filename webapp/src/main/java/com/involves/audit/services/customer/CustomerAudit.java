@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-import com.involves.audit.auditing.Auditing;
-import com.involves.audit.auditing.AuditingBuilder;
-import com.involves.audit.auditing.AuditingService;
+import com.involves.audit.services.auditing.Auditing;
+import com.involves.audit.services.auditing.AuditingBuilder;
+import com.involves.audit.services.auditing.AuditingService;
 
 @Service
 public class CustomerAudit {

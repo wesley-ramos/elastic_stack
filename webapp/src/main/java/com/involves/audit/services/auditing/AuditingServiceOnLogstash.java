@@ -1,4 +1,4 @@
-package com.involves.audit.auditing;
+package com.involves.audit.services.auditing;
 
 import java.net.DatagramPacket;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.involves.audit.configuration.AppConfiguration;
-import com.involves.audit.utils.MessageSerializer;
+import com.involves.audit.services.serializer.MessageSerializer;
 
 @Service
 public class AuditingServiceOnLogstash implements AuditingService {

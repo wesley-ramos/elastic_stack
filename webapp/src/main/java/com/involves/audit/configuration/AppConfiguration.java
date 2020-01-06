@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.involves.audit.auditing.AuditingConnection;
-import com.involves.audit.auditing.AuditingConnectionOnLogstash;
 import com.involves.audit.filter.Monitoring;
+import com.involves.audit.services.auditing.AuditingConnection;
+import com.involves.audit.services.auditing.AuditingConnectionOnLogstash;
 
 import io.prometheus.client.exporter.MetricsServlet;
 
@@ -33,7 +33,6 @@ public class AppConfiguration {
 	public ObjectMapper objectMapper() {
 		return new ObjectMapper();
 	}
-	
 	
 	@Bean
 	public AuditingConnection connection() throws Exception {
