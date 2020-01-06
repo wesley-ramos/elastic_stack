@@ -1,8 +1,6 @@
 package com.involves.audit.auditing;
 
 import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.involves.audit.configuration.AppConfiguration;
+import com.involves.audit.utils.MessageSerializer;
 
 @Service
 public class AuditingServiceOnLogstash implements AuditingService {
@@ -17,30 +16,25 @@ public class AuditingServiceOnLogstash implements AuditingService {
 	private Logger logger = LoggerFactory.getLogger(AuditingServiceOnLogstash.class);
 	
 	private AuditingConnection connection;
-	private LogstashMessageSpliter prepareMessage;
+	private MessageSerializer serializer;
 
 	@Autowired
-	public AuditingServiceOnLogstash(AuditingConnection connection, LogstashMessageSpliter prepareMessage) {
+	public AuditingServiceOnLogstash(AuditingConnection connection, MessageSerializer serializer) {
 		this.connection = connection;
-		this.prepareMessage = prepareMessage;
+		this.serializer = serializer;
 	}
 
 	@Override
 	public void audit(String functionality, Auditing auditing) {
 		
 		try {
-			
-			InetAddress address = InetAddress.getByName("localhost");
-			int port = 8090;
-			
+					
 			auditing.setFunctionality(functionality);
 			auditing.setApplication(AppConfiguration.APPLICATION_NAME);
 			
-			List<DatagramPacket> packets = prepareMessage.split(address, port, auditing);
-			
-			for (DatagramPacket packet : packets) {
-				connection.send(packet);
-			}
+			byte[] message = serializer.serialize(auditing.getData()).getBytes();
+	
+			connection.send(new DatagramPacket(message, message.length));
 			
 		} catch (Exception ex) {
 			logger.error("failed to send message to Logstash", ex);

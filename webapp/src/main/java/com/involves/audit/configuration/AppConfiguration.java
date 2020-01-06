@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.involves.audit.auditing.AuditingConnection;
+import com.involves.audit.auditing.AuditingConnectionOnLogstash;
 import com.involves.audit.filter.Monitoring;
 
 import io.prometheus.client.exporter.MetricsServlet;
@@ -18,6 +20,9 @@ public class AppConfiguration {
 	
 	public static String USER_NAME = "wesley.ramos";
 	public static String APPLICATION_NAME = "developer";
+	
+	private String LOGSTASH_URL = "localhost";
+	private int LOGSTASH_PORT = 8090;
 
 	@Bean
 	public ModelMapper modelMapper() {
@@ -27,6 +32,14 @@ public class AppConfiguration {
 	@Bean
 	public ObjectMapper objectMapper() {
 		return new ObjectMapper();
+	}
+	
+	
+	@Bean
+	public AuditingConnection connection() throws Exception {
+		AuditingConnection connection = new AuditingConnectionOnLogstash();
+		connection.connect(LOGSTASH_URL, LOGSTASH_PORT);
+		return connection;
 	}
 
 	@Bean

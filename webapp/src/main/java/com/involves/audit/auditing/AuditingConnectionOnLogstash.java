@@ -2,20 +2,31 @@ package com.involves.audit.auditing;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 
-import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Service
+
 public class AuditingConnectionOnLogstash implements AuditingConnection {
 	
+	private Logger logger = LoggerFactory.getLogger(AuditingConnectionOnLogstash.class);
 	private DatagramSocket socket;
-	
-	public AuditingConnectionOnLogstash() throws Exception {
+
+	@Override
+	public void connect(String url, int port) throws Exception {
+		InetAddress address = InetAddress.getByName(url);
+
 		socket = new DatagramSocket();
+		socket.connect(address, port);
 	}
-	
+
 	@Override
 	public void send(DatagramPacket packet) throws Exception {
+		if(socket == null) {
+			logger.warn("Logstash connection is down, please wait");
+			return;
+		}
 		socket.send(packet);
 	}
 }
